@@ -1,4 +1,4 @@
-node {
+node('CAE-Build01') {
 	def img
 
 	stage('Clone Repository') {
