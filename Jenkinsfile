@@ -1,4 +1,4 @@
-node {
+node('imce-infr-dev-01.jpl.nasa.gov') {
 	def img
 
 	stage('Clone Repository') {
