@@ -1,4 +1,4 @@
-node("Build01") {
+node('Build01') {
 	def img
 
 	stage('Clone Repository') {
