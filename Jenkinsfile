@@ -5,12 +5,11 @@ node {
 		checkout scm
 	}	
 	stage('Start docker') {
-		sh 'systemctl start docker.service'
+		sh 'ps -ef | grep docker'
 	}
 	stage('Build Image') {
 		img = docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor")
 	}
-
 	stage('Push Image') {
 
 	}
