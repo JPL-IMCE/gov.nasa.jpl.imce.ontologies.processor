@@ -1,15 +1,9 @@
 node {
-	def img
-
 	stage('Clone Repository') {
 		checkout scm
 	}	
-	stage('Start docker') {
-		sh 'ps -ef | grep docker'
-	}
-	stage('Build Image') {
-		img = docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor")
-	}
+	stage('Build Docker Image') {
+		sh 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor'
 	stage('Push Image') {
 
 	}
