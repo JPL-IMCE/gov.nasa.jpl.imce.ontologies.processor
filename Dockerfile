@@ -47,8 +47,10 @@ RUN wget -nv -O ${HOME}/sbt.tgz --no-check-certificate https://github.com/sbt/sb
     sbt
 
 # Clone audit framework/profile generator
-RUN git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow $HOME/gov.nasa.jpl.imce.ontologies.workflow && \
+RUN git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki $HOME/gov.nasa.jpl.imce.ontologies.fuseki && \
+    git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow $HOME/gov.nasa.jpl.imce.ontologies.workflow && \
     git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis $HOME/gov.nasa.jpl.imce.ontologies.analysis
+
 
 #COPY build.sh /home/sift/
 #RUN chmod +x /home/sift/build.sh
