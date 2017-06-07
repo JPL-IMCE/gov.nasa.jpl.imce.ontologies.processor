@@ -45,7 +45,19 @@ RUN git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki $H
     git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow $HOME/gov.nasa.jpl.imce.ontologies.workflow && \
     git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis $HOME/gov.nasa.jpl.imce.ontologies.analysis
 
+# Copy the required tools
 COPY target/tools ${HOME}/gov.nasa.jpl.imce.ontologies.tools
+
+# Symlink the tools to each workflow
+RUN mkdir $HOME/gov.nasa.jpl.imce.ontologies.workflow/target && \
+    ln -s $HOME/gov.nasa.jpl.imce.ontologies.tools $HOME/gov.nasa.jpl.imce.ontologies.workflow/target/tools && \
+    mkdir $HOME/gov.nasa.jpl.imce.ontologies.analysis/target && \
+    ln -s $HOME/gov.nasa.jpl.imce.ontologies.tools $HOME/gov.nasa.jpl.imce.ontologies.analysis/target/tools
+
+# Symlink ontologies to workflow
+RUN mkdir $HOME/gov.nasa.jpl.imce.ontologies && \
+    ln -s $HOME/gov.nasa.jpl.imce.ontologies $HOME/gov.nasa.jpl.imce.ontologies.workflow/target/ontologies
+
 #COPY build.sh /home/sift/
 #RUN chmod +x /home/sift/build.sh
 
