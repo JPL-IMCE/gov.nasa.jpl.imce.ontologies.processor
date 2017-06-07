@@ -9,7 +9,7 @@ node('IMCE') {
 						  usernameVariable: 'USERNAME',
 						  passwordVariable: 'PASSWORD']]) {
 
-			sh 'gradle extractTools -PartifactoryUser=$USERNAME -PartifactoryPassword=$PASSWORD'
+			sh './gradlew extractTools -PartifactoryUser=$USERNAME -PartifactoryPassword=$PASSWORD'
 	 	}	
 	}
 
