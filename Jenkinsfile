@@ -4,7 +4,13 @@ node {
 	}	
 
 	stage('Setup Tools') {
-		sh 'gradle extractTools'
+		withCredentials([[$class: 'UsernamePasswordMultiBinding',
+						  credentialsId: 'IMCE-CI',
+						  usernameVariable: 'USERNAME',
+						  passwordVariable: 'PASSWORD']]) {
+
+			sh 'gradle extractTools -PartifactoryUser=$USERNAME -PartifactoryPassword=$PASSWORD'
+	 	}	
 	}
 
 	stage('Build Docker Image') {
