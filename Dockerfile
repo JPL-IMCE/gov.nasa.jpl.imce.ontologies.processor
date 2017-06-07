@@ -16,12 +16,6 @@ RUN \
     apt-get update && apt-get install -y \
     curl zip unzip wget tar make git gcc build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libxml2-utils xsltproc
 
-# Install JDK
-#RUN wget -nv -O ${HOME}/java.tar.gz --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz && \
-#    mkdir ${JAVA_HOME} && \
-#    tar -C ${JAVA_HOME} -zxf ${HOME}/java.tar.gz --strip 1 && \
-#    rm ${HOME}/java.tar.gz
-
 # Install Ruby
 RUN wget -nv -O ${HOME}/ruby.tar.gz --no-check-certificate https://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p648.tar.gz && \
     mkdir ${RUBY_HOME} && \
@@ -51,7 +45,7 @@ RUN git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki $H
     git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow $HOME/gov.nasa.jpl.imce.ontologies.workflow && \
     git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis $HOME/gov.nasa.jpl.imce.ontologies.analysis
 
-
+COPY target/tools ${HOME}/gov.nasa.jpl.imce.ontologies.tools
 #COPY build.sh /home/sift/
 #RUN chmod +x /home/sift/build.sh
 

@@ -1,0 +1,62 @@
+import java.util.zip.ZipFile
+
+//Variables
+def targetDir = "target"
+def dependenciesDir = targetDir + "/" + "dependencies" 
+def toolsDir =  targetDir + "/" + "tools"
+
+apply plugin: 'java'
+
+repositories {
+    maven {
+        url 'https://cae-artifactory.jpl.nasa.gov/artifactory/maven-libs-release-virtual'
+        credentials {
+            username artifactoryUser
+            password artifactoryPassword
+        }
+    }
+    maven {
+    	url "https://dl.bintray.com/jpl-imce/gov.nasa.jpl.imce"
+    }
+}
+
+dependencies {
+	compile(group: 'gov.nasa.jpl.imce', 
+            name: 'gov.nasa.jpl.imce.ontologies.tools', 
+            version: '0.7.0', ext: 'zip', 
+            classifier: 'resource')
+    compile(group: 'net.sf.docbook', 
+            name: 'docbook-xsl', 
+            version: '1.79.1', 
+            ext: 'zip', 
+            classifier: 'resources')
+}
+
+task copyDependencies(type: Copy) {
+    into "target/dependencies"
+    from configurations.testRuntime
+}
+
+task extractTools (dependsOn: copyDependencies, type: Copy) {
+        File dependencies
+
+        // Create a file collection using a closure
+        def collection = files { dependencies.listFiles() }
+        dependencies = file(dependenciesDir)
+        
+        // Extract files
+        collection.collect { it }.sort().each { 
+            if (it.name.contains("gov.nasa.jpl.imce.ontologies.tools")) {
+                    from zipTree(it)
+                    into toolsDir
+                }
+            else if (it.name.contains("docbook-xsl")) {
+                from zipTree(it)
+                into toolsDir
+            }
+        }
+}
+
+task setupTools {
+
+}
