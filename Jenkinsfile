@@ -14,7 +14,7 @@ node('IMCE') {
 	}
 
 	stage('Build Docker Image') {
-		def app = docker.build "jplimce/gov.nasa.jpl.imce.ontologies.processor"
+		sh 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor'
 	}
 
 	stage('Push Image') {
