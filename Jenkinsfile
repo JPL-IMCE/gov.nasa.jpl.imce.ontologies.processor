@@ -1,4 +1,5 @@
-node('IMCE') {
+pipeline {
+	agent 'IMCE'
 	stage('Clone Repository') {
 		checkout scm
 	}	
