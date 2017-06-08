@@ -58,6 +58,20 @@ RUN mkdir $HOME/gov.nasa.jpl.imce.ontologies.workflow/target && \
 RUN mkdir $HOME/gov.nasa.jpl.imce.ontologies && \
     ln -s $HOME/gov.nasa.jpl.imce.ontologies $HOME/gov.nasa.jpl.imce.ontologies.workflow/target/ontologies
 
+# Install gem
+RUN gem install $HOME/gov.nasa.jpl.imce.ontologies.workflow/gems/docbook-1.0.7.gem
+
+# Start fuseki
+RUN cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki && \
+    sbt setupFuseki && \
+    cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki/workflow && \
+    chmod +X env.sh && \ 
+    env.sh && \
+    make start-fuseki 
+
+# Symlink fuseki to workflow
+RUN ln -s $HOME/gov.nasa.jpl.imce.ontologies.fuseki/target/fuseki $HOME/gov.nasa.jpl.imce.ontologies.workflow/target/fuseki
+
 #COPY build.sh /home/sift/
 #RUN chmod +x /home/sift/build.sh
 
