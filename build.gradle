@@ -1,9 +1,9 @@
 import java.util.zip.ZipFile
 
 //Variables
-def targetDir = "target"
-def dependenciesDir = targetDir + "/" + "dependencies" 
-def toolsDir =  targetDir + "/" + "tools"
+def buildDir = "build"
+def dependenciesDir = buildDir + "/" + "dependencies" 
+def toolsDir =  buildDir + "/" + "tools"
 
 apply plugin: 'java'
 
@@ -33,30 +33,22 @@ dependencies {
 }
 
 task copyDependencies(type: Copy) {
-    into "target/dependencies"
-    from configurations.testRuntime
+    into dependenciesDir
+    from configurations.default
 }
 
 task extractTools (dependsOn: copyDependencies, type: Copy) {
-        File dependencies
+        File dep
 
         // Create a file collection using a closure
-        def collection = files { dependencies.listFiles() }
-        dependencies = file(dependenciesDir)
+        def collection = files { dep.listFiles() }
+        dep = file(dependenciesDir)
         
         // Extract files
         collection.collect { it }.sort().each { 
-            if (it.name.contains("gov.nasa.jpl.imce.ontologies.tools")) {
+            if (it.name.contains(".zip")) {
                     from zipTree(it)
                     into toolsDir
                 }
-            else if (it.name.contains("docbook-xsl")) {
-                from zipTree(it)
-                into toolsDir
-            }
         }
-}
-
-task setupTools {
-
 }
