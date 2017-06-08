@@ -32,7 +32,7 @@ dependencies {
             classifier: 'resources')
 }
 
-task copyDependencies(type: Copy) {
+task copyDependencies(dependsOn: dependencies, type: Copy) {
     into "target/dependencies"
     from configurations.testRuntime
 }
