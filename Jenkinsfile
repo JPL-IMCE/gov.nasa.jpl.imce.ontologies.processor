@@ -1,5 +1,8 @@
 pipeline {
-	agent 'IMCE'
+	agent {
+		label 'IMCE'
+	}
+	stages {
 	stage('Clone Repository') {
 		checkout scm
 	}	
@@ -21,5 +24,6 @@ pipeline {
 
 	stage('Push Image') {
 
+	}
 	}
 }
