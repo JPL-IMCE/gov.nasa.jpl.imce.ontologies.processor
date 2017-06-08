@@ -32,17 +32,11 @@ dependencies {
             classifier: 'resources')
 }
 
-task copyDependencies(type: Copy) {
-    into dependenciesDir
-    from configurations.default
-}
-
-task extractTools (dependsOn: copyDependencies, type: Copy) {
+task extractTools (type: Copy) {
         File dep
-
-        // Create a file collection using a closure
-        def collection = files { dep.listFiles() }
         dep = file(dependenciesDir)
+        // Create a file collection using a closure
+        def collection = configurations.default
         
         // Extract files
         collection.collect { it }.sort().each { 
