@@ -68,8 +68,8 @@ RUN cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki && \
 # Start fuseki
 RUN cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki/workflow && \
     chmod +x env.sh && \ 
-    env.sh && \
-    make start-fuseki 
+    sh env.sh
+#    make start-fuseki 
 
 # Symlink fuseki to workflow
 RUN ln -s $HOME/gov.nasa.jpl.imce.ontologies.fuseki/target/fuseki $HOME/gov.nasa.jpl.imce.ontologies.workflow/target/fuseki
