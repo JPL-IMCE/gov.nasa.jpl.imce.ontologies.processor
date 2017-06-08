@@ -4,10 +4,13 @@ pipeline {
 	}
 	stages {
 	stage('Clone Repository') {
-		checkout scm
+		steps {
+			checkout scm
+		}
 	}	
 
 	stage('Setup Tools') {
+		steps {
 		withCredentials([[$class: 'UsernamePasswordMultiBinding',
 						  credentialsId: 'IMCE-CI',
 						  usernameVariable: 'USERNAME',
@@ -15,15 +18,19 @@ pipeline {
 
 			sh './gradlew clean extractTools -PartifactoryUser=$USERNAME -PartifactoryPassword=$PASSWORD'
 	 	}	
+	 	}
 	}
 
 	stage('Build Docker Image') {
+		steps{
 		sh 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor . > build.log';
-
+		}
 	}
 
 	stage('Push Image') {
-
+		steps {
+			echo 'Pushing!'
+		}
 	}
 	}
 }
