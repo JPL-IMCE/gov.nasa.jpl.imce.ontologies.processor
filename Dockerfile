@@ -63,7 +63,7 @@ RUN gem install $HOME/gov.nasa.jpl.imce.ontologies.workflow/gems/docbook-1.0.7.g
 
 # Setup fuseki
 RUN cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki && \
-    sbt setupFuseki && \
+    sbt setupFuseki
 
 # Start fuseki
 RUN cd $HOME/gov.nasa.jpl.imce.ontologies.fuseki/workflow && \
