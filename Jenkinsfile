@@ -23,7 +23,7 @@ pipeline {
 
 	stage('Build Docker Image') {
 		steps{
-		sh 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor . > build.log';
+			def out = sh script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor .', returnStdout: true;
 		}
 	}
 
