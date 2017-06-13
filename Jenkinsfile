@@ -23,7 +23,9 @@ pipeline {
 
 	stage('Build Docker Image') {
 		steps {
-		sh returnStdout: true, script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor .'
+		        timeout(time: 30, unit: 'MINUTES') {
+					sh returnStdout: true, script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor .'
+                }
 		}
 	}
 
