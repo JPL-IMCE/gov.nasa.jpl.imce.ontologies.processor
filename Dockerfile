@@ -72,4 +72,6 @@ RUN cd $IMCE/fuseki && \
 RUN cd $IMCE/fuseki/workflow && \
     chmod +x env.sh && \ 
     sh env.sh
-#    make start-fuseki 
+#    make start-fuseki
+
+ADD ./resources /
