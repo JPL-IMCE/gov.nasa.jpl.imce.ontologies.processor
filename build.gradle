@@ -27,22 +27,62 @@ dependencies {
             classifier: 'resource')
     compile(group: 'net.sf.docbook', 
             name: 'docbook-xsl', 
-            version: '1.79.1', 
-            ext: 'zip', 
+            version: '1.79.1',
+            ext: 'zip',
             classifier: 'resources')
+    compile(group: 'gov.nasa.jpl.imce',
+            name: 'gov.nasa.jpl.imce.oml.converters_2.11',
+            version: '0.1.0.5',
+            classifier: 'resource',
+            ext: 'tgz')
 }
 
 task extractTools (type: Copy) {
-        File dep
-        dep = file(dependenciesDir)
-        // Create a file collection using a closure
-        def collection = configurations.default
-        
-        // Extract files
-        collection.collect { it }.sort().each { 
-            if (it.name.contains(".zip")) {
-                    from zipTree(it)
-                    into toolsDir
+
+    File dep
+    dep = file(dependenciesDir)
+    // Create a file collection using a closure
+    def collection = configurations.default
+
+    // Extract files
+    collection.collect { it }.sort().each {
+        if (it.name.contains(".zip")) {
+            from zipTree(it)
+            into toolsDir
+        } else if (it.name.endsWith(".tgz")) {
+            from tarTree(it)
+            into toolsDir
+
+            // In gradle, how to do the equivalent of the following?
+            //
+            // mkdir omlConverter
+            // (cd omlConverter; tar -zxf *.tgz --strip-components 1)
+
+            // This is an approximation, the result is two folders:
+            // 1) gov-nasa-jpl-imce-oml-converters-<version>
+            // 2) omlConverter
+
+            // (1) should not have been created by the renaming below!
+            eachFile { FileCopyDetails fcp ->
+                if (fcp.relativePath.segments[0].startsWith("gov-nasa-jpl-imce-oml-converters")) {
+                    fcp.relativePath.segments[0] = "omlConverter"
                 }
+            }
         }
+    }
+
+}
+
+task cleanSuperfluous(dependsOn: extractTools) {
+
+    doLast {
+        println("toolsDir=$toolsDir")
+
+        // find build/tools/gov-nasa-jpl-imce-oml-converters-<version>
+        // @TODO this seems to returns nothing, why?
+        def original = fileTree(dir: toolsDir, include: 'gov*').collect()
+
+        // @TODO delete ...
+        println("delete: $original") // Currently: delete: []
+    }
 }
