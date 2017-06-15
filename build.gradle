@@ -78,11 +78,11 @@ task cleanSuperfluous(dependsOn: extractTools) {
     doLast {
         println("toolsDir=$toolsDir")
 
-        // find build/tools/gov-nasa-jpl-imce-oml-converters-<version>
-        // @TODO this seems to returns nothing, why?
-        def original = fileTree(dir: toolsDir, include: 'gov*').collect()
+        files { file(toolsDir).listFiles() }.filter { it.name.startsWith("gov")}.forEach {
 
-        // @TODO delete ...
-        println("delete: $original") // Currently: delete: []
+            println("Deleting: $it")
+            it.deleteDir()
+        }
+
     }
 }

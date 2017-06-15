@@ -1,0 +1,23 @@
+jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.0 is the first public release
+
+## Contents
+
+- from: maven:3.5-jdk-8
+
+- [gov.nasa.jpl.imce.oml.converters](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.oml.converters)
+
+    Version [0.1.0.5](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.oml.converters/blob/master/notes/0.1.0.5.markdown)
+    
+- [gov.nasa.jpl.imce.ontologies.fuseki](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki)
+
+    Version ...
+    
+- [gov.nasa.jpl.imce.ontologies.workflow](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow)
+
+    Version ...
+    
+- [gov.nasa.jpl.imce.ontologies.analysis](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis)
+
+    Version ...
+    
+    
