@@ -23,6 +23,11 @@ The following command builds the docker image.
 |--------------------|-------------|
 |`/imce`             | The root for IMCE-related ontology processing. |
 |`/imce/tools`       | IMCE tools included in the docker image |
+|`/imce/fuseki`      | Clone of [gov.nasa.jpl.imce.ontologies.fuseki](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki) |
+|`/imce/workflow`    | Clone of [gov.nasa.jpl.imce.ontologies.workflow](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow) |
+|`/imce/analysis`    | Clone of [gov.nasa.jpl.imce.ontologies.analysis](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis) |
+|`/imce/ontology`    | Predefined location for mounting of ontologies, this is then symlinked into `/imce/target/ontologies` |
+|`/imce/target`      | Predefined location for mounting of target, this is then symlinked into `/imce/fuseki/target`, `/imce/workflow/target` , and `/imce/analysis/target` |
 
 ## Running
 
