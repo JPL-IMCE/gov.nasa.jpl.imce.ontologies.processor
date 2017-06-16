@@ -1,0 +1,5 @@
+jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.2 is a minor update
+
+## Issues Resolved
+
+- [#1 Update to OML Converter 0.1.0.6](https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.processor/issues/1)
