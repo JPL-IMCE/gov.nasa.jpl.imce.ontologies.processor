@@ -57,8 +57,6 @@ RUN mkdir $IMCE/ontologies && \
     ln -s $IMCE/ontologies $IMCE/target/ontologies
 
 # Symlink target to tools
-RUN ln -sfn $IMCE/target $IMCE/workflow/target
-RUN ln -sfn $IMCE/target $IMCE/analysis/target
 RUN ln -sfn $IMCE/target $IMCE/fuseki/target
 
 # Install gem
@@ -67,11 +65,5 @@ RUN gem install $IMCE/workflow/gems/docbook-1.0.7.gem
 # Setup fuseki
 RUN cd $IMCE/fuseki && \
     sbt setupFuseki
-
-# Start fuseki
-RUN cd $IMCE/fuseki/workflow && \
-    chmod +x env.sh && \ 
-    sh env.sh
-#    make start-fuseki
-
+    
 ADD ./resources /

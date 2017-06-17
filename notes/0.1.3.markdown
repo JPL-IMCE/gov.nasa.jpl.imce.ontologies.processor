@@ -1,0 +1,7 @@
+jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.2
+
+## Updates
+
+- removed target symlinking to /imce/workflow/workflow
+- removed target symlinking to /imce/analysis/workflow
+    
