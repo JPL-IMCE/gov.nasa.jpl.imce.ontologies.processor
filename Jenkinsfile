@@ -4,7 +4,6 @@ pipeline {
 	}
 
 	stages {
-		def app
 		stage('Clone Repositories') {
 		steps {
 			checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'fuseki']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki']]])
@@ -27,7 +26,7 @@ pipeline {
 
 		stage('Build Docker Image') {
 			steps {
-		    	app = docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo");
+		    	def app = docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo");
 			}
 		}
 
