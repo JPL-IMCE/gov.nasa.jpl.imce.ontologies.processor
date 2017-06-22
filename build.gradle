@@ -23,7 +23,7 @@ repositories {
 dependencies {
 	compile(group: 'gov.nasa.jpl.imce', 
             name: 'gov.nasa.jpl.imce.ontologies.tools', 
-            version: '0.7.0', ext: 'zip', 
+            version: '0.8.0', ext: 'zip', 
             classifier: 'resource')
     compile(group: 'net.sf.docbook', 
             name: 'docbook-xsl', 

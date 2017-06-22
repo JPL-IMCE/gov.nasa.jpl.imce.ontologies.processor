@@ -14,7 +14,7 @@ RUN useradd proc && mkdir -p ${IMCE} && chown -R proc:proc ${IMCE} && echo "proc
 # Update apt-get and install basic software, docbook style sheets
 RUN \
     apt-get update && apt-get install -y \
-    curl zip unzip wget tar make git gcc build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libxml2-utils xsltproc
+    curl zip unzip wget tar make git gcc nano build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libxml2-utils xsltproc
 
 # Install Ruby
 RUN wget -nv -O ${IMCE}/ruby.tar.gz --no-check-certificate https://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p648.tar.gz && \
@@ -40,13 +40,12 @@ RUN wget -nv -O ${IMCE}/sbt.tgz --no-check-certificate https://github.com/sbt/sb
     rm ${IMCE}/sbt.tgz && \
     sbt
 
-# Clone audit framework/profile generator
-RUN git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki $IMCE/fuseki && \
-    git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow $IMCE/workflow && \
-    git clone https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis $IMCE/analysis
-
-# Copy the required tools
-COPY build/tools ${IMCE}/tools
+# Add workspace files
+ADD ./resources /
+ADD ./analysis $IMCE/analysis
+ADD ./fuseki $IMCE/fuseki
+ADD build/tools $IMCE/tools
+ADD ./workflow $IMCE/workflow
 
 # Symlink the tools to target
 RUN mkdir $IMCE/target && \
@@ -56,14 +55,14 @@ RUN mkdir $IMCE/target && \
 RUN mkdir $IMCE/ontologies && \
     ln -s $IMCE/ontologies $IMCE/target/ontologies
 
-# Symlink target to tools
+# Symlink target to fuseki target
 RUN ln -sfn $IMCE/target $IMCE/fuseki/target
-
-# Install gem
-RUN gem install $IMCE/workflow/gems/docbook-1.0.7.gem
 
 # Setup fuseki
 RUN cd $IMCE/fuseki && \
     sbt setupFuseki
-    
-ADD ./resources /
+
+# Install gem
+RUN gem install $IMCE/workflow/gems/docbook-1.0.7.gem
+
+
