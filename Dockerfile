@@ -13,7 +13,7 @@ RUN useradd proc && mkdir -p ${IMCE} && chown -R proc:proc ${IMCE} && echo "proc
 
 # Update apt-get and install basic software, docbook style sheets
 RUN \
-    apt-get update && apt-get install -y \
+    apt-get -qq update && apt-get -qq install -y \
     curl zip unzip wget tar make git gcc nano build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libxml2-utils xsltproc
 
 # Install Ruby
@@ -23,7 +23,7 @@ RUN wget -nv -O ${IMCE}/ruby.tar.gz --no-check-certificate https://cache.ruby-la
     tar -C ${IMCE}/ruby -zxf ${IMCE}/ruby.tar.gz --strip 1 && \
     cd ${IMCE}/ruby/ && \
     ./configure --prefix=${RUBY_HOME} --disable-install-doc && \
-    make && make install && \
+    make && make install > /imce/rubyInstall.log && \
     rm ${IMCE}/ruby.tar.gz &&\
     rm -rf ${IMCE}/ruby
 
