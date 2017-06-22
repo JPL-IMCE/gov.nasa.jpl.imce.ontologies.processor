@@ -3,6 +3,10 @@ pipeline {
 		label 'IMCE'
 	}
 
+	environment {
+        DOCKER_EMAIL = 'rcastill@jpl.nasa.gov'
+    }
+    
 	stages {
 		stage('Clone Repositories') {
 		steps {
@@ -38,7 +42,7 @@ pipeline {
 						  credentialsId: 'IMCE-Docker-Hub',
 						  usernameVariable: 'DOCKER_USERNAME',
 						  passwordVariable: 'DOCKER_PASSWORD']]) {
-					sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; docker push jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo'
+					sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL; docker push jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo'
 	 			}	
 			}
 		}
