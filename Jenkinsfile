@@ -5,15 +5,9 @@ pipeline {
 	stages {
 	stage('Clone Repositories') {
 		steps {
-			step {
-				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'fuseki']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki']]])
-			}
-			step {
-				checkout([$class: 'GitSCM', branches: [[name: 'feature/IMCEIS-1350-adapt-ontologies-public-and-ontologi']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'workflow']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow']]])
-			}
-			step {
-				checkout([$class: 'GitSCM', branches: [[name: 'feature/IMCEIS-1352-adapt-ontologies-workflow-for-CAESAR']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'analysis']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis']]])
-			}
+			checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'fuseki']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki']]])
+			checkout([$class: 'GitSCM', branches: [[name: 'feature/IMCEIS-1350-adapt-ontologies-public-and-ontologi']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'workflow']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.workflow']]])
+			checkout([$class: 'GitSCM', branches: [[name: 'feature/IMCEIS-1352-adapt-ontologies-workflow-for-CAESAR']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'analysis']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.analysis']]])
 		}
 	}	
 
