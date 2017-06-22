@@ -32,9 +32,14 @@ pipeline {
 			}
 		}
 
-		stage('Push Image') {
+		stage('Push Docker Image') {
 			steps {
-				echo 'Pushing!'
+				withCredentials([[$class: 'UsernamePasswordMultiBinding',
+						  credentialsId: 'IMCE-Docker-Hub',
+						  usernameVariable: 'DOCKER_USERNAME',
+						  passwordVariable: 'DOCKER_PASSWORD']]) {
+					sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; docker push jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo'
+	 			}	
 			}
 		}
 	}
