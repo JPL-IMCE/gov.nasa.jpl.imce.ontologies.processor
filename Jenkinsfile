@@ -25,7 +25,7 @@ pipeline {
 
 	stage('Build Docker Image') {
 		steps {
-		        timeout(time: 10, unit: 'SECONDS') {
+		        timeout(time: 1, unit: 'HOURS') {
 					sh returnStdout: true, script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.processor .'
                 }
 		}
