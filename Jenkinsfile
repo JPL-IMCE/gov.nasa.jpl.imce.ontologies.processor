@@ -26,7 +26,9 @@ pipeline {
 
 		stage('Build Docker Image') {
 			steps {
-		    	docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo");
+		    	script {
+		    		docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo");
+				}
 			}
 		}
 
