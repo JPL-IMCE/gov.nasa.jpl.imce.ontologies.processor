@@ -1,7 +1,9 @@
 pipeline {
+	def app
 	agent {
 		label 'IMCE'
 	}
+
 	stages {
 	stage('Clone Repositories') {
 		steps {
@@ -25,7 +27,9 @@ pipeline {
 
 	stage('Build Docker Image') {
 		steps {
-		        docker.build "jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo"
+			script {
+		        app = docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:0.1.3-caesar_demo");
+			}
 		}
 	}
 
