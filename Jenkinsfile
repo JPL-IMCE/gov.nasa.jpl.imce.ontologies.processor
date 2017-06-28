@@ -32,7 +32,7 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 		    	script {
-		    		docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:$IMAGE_TAG");
+		    		docker.build("jplimce/gov.nasa.jpl.imce.ontologies.processor:$DOCKER_IMAGE_TAG");
 				}
 			}
 		}
@@ -43,7 +43,7 @@ pipeline {
 						  credentialsId: 'IMCE-Docker-Hub',
 						  usernameVariable: 'DOCKER_USERNAME',
 						  passwordVariable: 'DOCKER_PASSWORD']]) {
-					sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL; docker push jplimce/gov.nasa.jpl.imce.ontologies.processor:$IMAGE_TAG'
+					sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL; docker push jplimce/gov.nasa.jpl.imce.ontologies.processor:$DOCKER_IMAGE_TAG'
 	 			}	
 			}
 		}
